@@ -5,6 +5,33 @@ from PIL import Image
 import numpy
 import sys
 
+def get_row_or_column(image, index, get_row=True):
+  pixels        = image.load()
+  width, height = image.size()
+
+  data = list()
+  if get_row:
+    for x in range(width):
+      data.append( pixels[x,index] )
+  else:
+    for y in range(height):
+      data.append( pixels[index,y] )
+
+  return data
+
+def set_row_or_column(image, index, data, set_row=True):
+  pixels        = image.load()
+  width, height = image.size()
+
+  if set_row:
+    for x in range(width):
+      pixels[x,index] = data[x]
+  else:
+    for y in range(height):
+      pixels[index,y] = data[y]
+
+  return image
+
 def calculate_ranges(image, per_column=False):
   pixels        = image.load()
   width, height = image.size
