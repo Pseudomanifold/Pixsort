@@ -7,7 +7,7 @@ import sys
 
 def get_row_or_column(image, index, get_row=True):
   pixels        = image.load()
-  width, height = image.size()
+  width, height = image.size
 
   data = list()
   if get_row:
@@ -21,7 +21,7 @@ def get_row_or_column(image, index, get_row=True):
 
 def set_row_or_column(image, index, data, set_row=True):
   pixels        = image.load()
-  width, height = image.size()
+  width, height = image.size
 
   if set_row:
     for x in range(width):
@@ -31,6 +31,21 @@ def set_row_or_column(image, index, data, set_row=True):
       pixels[index,y] = data[y]
 
   return image
+
+def calculate_variabilities(image, per_row=True):
+  width, height = image.size
+  n             = height if per_row else width
+  result        = list()
+
+  for i in range(n):
+    data = numpy.array(get_row_or_column(image, i, per_row))
+    mean = numpy.mean(data)
+    data = data - mean
+    data = abs(data)
+
+    result.append( -numpy.sum(data) )
+
+  return result
 
 def calculate_ranges(image, per_column=False):
   pixels        = image.load()
@@ -80,12 +95,13 @@ def sort(image, index, per_column=False):
   return image
 
 if __name__ == "__main__":
-  image   = Image.open(sys.argv[1])
-  ranges  = calculate_ranges(image)
-  indices = numpy.argsort(ranges)
+  image         = Image.open(sys.argv[1])
+  ranges        = calculate_ranges(image)
+  variabilities = calculate_variabilities(image)
+  indices       = numpy.argsort(variabilities)
 
   # TODO: make configurable
-  n = 500
+  n = 50
 
   for i in range(n):
     image = sort(image, int(indices[i]))
