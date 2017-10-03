@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from PIL import Image
+from PIL import ImageFilter
 
 import numpy
 import sys
@@ -71,27 +72,15 @@ def calculate_ranges(image, per_column=False):
 
   return result
 
-def sort(image, index, per_column=False):
+def sort(image, index, per_row=True):
+  edges         = image.filter(ImageFilter.FIND_EDGES)
   pixels        = image.load()
   width, height = image.size
 
-  relevant_pixels = list()
-  if per_column:
-    for y in range(height):
-      relevant_pixels.append( pixels[index,y] )
-  else:
-    for x in range(width):
-      relevant_pixels.append( pixels[x,index] )
+  data = get_row_or_column(image, index, per_row)
+  data.sort(reverse=True)
 
-  relevant_pixels.sort(reverse=True)
-
-  if per_column:
-    for (y,p) in zip(range(height), relevant_pixels):
-      pixels[index,y] = p
-  else:
-    for (x,p) in zip(range(width), relevant_pixels):
-      pixels[x,index] = p
-
+  image = set_row_or_column(image, index, data, per_row)
   return image
 
 if __name__ == "__main__":
