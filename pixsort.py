@@ -72,27 +72,30 @@ def calculate_ranges(image, per_column=False):
 
   return result
 
-def sort(image, index, per_row=True):
-  edges         = image.filter(ImageFilter.FIND_EDGES)
+def sort(image, edges, index, per_row=True):
   pixels        = image.load()
   width, height = image.size
 
-  data = get_row_or_column(image, index, per_row)
-  data.sort(reverse=True)
+  data      = get_row_or_column(image, index, per_row)
+  edge_data = get_row_or_column(edges, index, per_row)
+  maxima    = numpy.argwhere(edge_data == numpy.max(edge_data)).flatten()
+  start     = maxima[-1]
 
-  image = set_row_or_column(image, index, data, per_row)
+  data[start:] = sorted(data[start:], reverse=True)
+  image        = set_row_or_column(image, index, data, per_row)
   return image
 
 if __name__ == "__main__":
   image         = Image.open(sys.argv[1])
+  edges         = image.filter(ImageFilter.SHARPEN).filter(ImageFilter.FIND_EDGES)
   ranges        = calculate_ranges(image)
   variabilities = calculate_variabilities(image)
   indices       = numpy.argsort(variabilities)
 
   # TODO: make configurable
-  n = 50
+  n = 1000
 
   for i in range(n):
-    image = sort(image, int(indices[i]))
+    image = sort(image, edges, int(indices[i]))
 
   image.show()
