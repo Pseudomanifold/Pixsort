@@ -5,6 +5,7 @@ from PIL import ImageFilter
 
 import argparse
 import numpy
+import os
 import random
 import sys
 
@@ -109,3 +110,9 @@ if __name__ == '__main__':
 
     if arguments.output:
         image.save(output)
+    else:
+        dirname = os.path.dirname(arguments.input)
+        name = os.path.basename(arguments.input)
+        name = os.path.splitext(name)[0]
+
+        image.save(os.path.join(dirname, name+'_sorted.jpg'))
