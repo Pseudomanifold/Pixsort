@@ -9,12 +9,12 @@ Examples
 --------
 
 <figure>
-  ![Lena (original)](Images/Lena_small_sorted.jpg)
+![Lena (original)](Images/Lena_small_sorted.jpg)
   <figcaption>Lena (original)</figcaption>
 </figure>
 
 <figure>
-  ![Lena (sorted)](Images/Lena_small_sorted.jpg)
+![Lena (sorted)](Images/Lena_small_sorted.jpg)
   <figcaption>Lena (sorted)</figcaption>
 </figure>
 
