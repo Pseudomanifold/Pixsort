@@ -9,12 +9,12 @@ Examples
 --------
 
 <figure>
-  <img src="Images/Lena_small.jpg" alt="Lena (original)" />
+  <img src="Images/Lena_small.jpg" alt="Lena (original)" width="100px" />
   <figcaption>Lena (original)</figcaption>
 </figure>
 
 <figure>
-  <img src="Images/Lena_small_sorted.jpg" alt="Lena (sorted)" />
+  <img src="Images/Lena_small_sorted.jpg" alt="Lena (sorted)" width="100px" />
   <figcaption>Lena (sorted)</figcaption>
 </figure>
 
