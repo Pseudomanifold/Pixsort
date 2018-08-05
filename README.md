@@ -8,7 +8,15 @@ was damaged.
 Examples
 --------
 
-TBD
+<figure>
+  ![Lena (original)](Images/Lena_small_sorted.jpg)
+  <figcaption>Lena (original)</figcaption>
+</figure>
+
+<figure>
+  ![Lena (sorted)](Images/Lena_small_sorted.jpg)
+  <figcaption>Lena (sorted)</figcaption>
+</figure>
 
 Usage
 -----
