@@ -9,7 +9,7 @@ Examples
 --------
 
 <figure>
-![Lena (original)](Images/Lena_small_sorted.jpg)
+  <img src="Images/Lena_small_sorted.jpg" alt="Lena (original)" />
   <figcaption>Lena (original)</figcaption>
 </figure>
 
